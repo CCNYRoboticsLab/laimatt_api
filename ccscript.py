@@ -5,6 +5,31 @@ import csv
 import json
 import re
 import laspy
+import os
+
+def segment_pointcloud():
+    # Set environment variables
+    os.environ["DISPLAY"] = ":0"
+    os.environ["QT_QPA_PLATFORM"] = "offscreen"
+    cc_command = [
+        "CloudCompare",
+        "-SILENT",
+        "-O",
+        "-GLOBAL_SHIFT",
+        "AUTO",
+        "/home/roboticslab/Developer/laimatt_api/3sections - 170 - 253.las",
+        "-C_EXPORT_FMT",
+        "LAS",
+        "-EXTRACT_CC",
+        "5",
+        "20",  # You might need to adjust these parameters
+    ]
+    try:
+        result = subprocess.run(cc_command, capture_output=True, text=True, check=True)
+        print("CloudCompare output:\n", result.stdout)
+    except subprocess.CalledProcessError as e:
+        print("CloudCompare error:\n", e.stderr)
+        sys.exit(1)
 
 def get_center_point_x(las_file_path):
     with laspy.open(las_file_path) as f:
@@ -41,21 +66,7 @@ csvoutput = open('data.csv', 'w', newline='')
 writer = csv.writer(csvoutput)
 writer.writerow(['Crack_ID', 'x', 'y', 'z', 'original file'])
 
-command = [
-    "CloudCompare",
-    "-SILENT",
-    "-O",
-    "-GLOBAL_SHIFT",
-    "AUTO",
-    "C:\\Users\\RoboticsLab_NUC#0\\Desktop\\laimatt\\3sections - 170 - 253.LAS",
-    "-C_EXPORT_FMT",
-    "LAS",
-    "-EXTRACT_CC",
-    "5",
-    "20",
-]
-
-subprocess.run(command, shell=True)
+segment_pointcloud()
 
 numFiles = 0
 destination = 'output'

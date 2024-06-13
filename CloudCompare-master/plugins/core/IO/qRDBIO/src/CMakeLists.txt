@@ -1,7 +1,0 @@
-
-target_sources( ${PROJECT_NAME}
-	PRIVATE
-		${CMAKE_CURRENT_LIST_DIR}/qRDBIO.cpp
-		${CMAKE_CURRENT_LIST_DIR}/RDBFilter.cpp
-		${CMAKE_CURRENT_LIST_DIR}/RDBOpenDialog.cpp
-)
