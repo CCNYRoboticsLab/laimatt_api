@@ -118,7 +118,7 @@ def create_task(file):
     tm_str = getFilePath(token, project_id, task_id, "texturemap")  
     all_str = getFilePath(token, project_id, task_id, "all")  
     pc_str = getFilePath(token, project_id, task_id, "pointcloud")  
-    update_data = (project_id, task_id, tm_str, all_str, pc_str, SQLid)
+    update_data = (project_id, task_id, pc_str, all_str, tm_str, SQLid)
     cursor.execute(update_query, update_data)
     mydb.commit()
     cursor.close()
