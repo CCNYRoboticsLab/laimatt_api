@@ -17,6 +17,7 @@ from skimage.draw import line
 
 opensfm_path = '/home/roboticslab/code/ODM_gpu/SuperBuild/install/bin/opensfm'
 sys.path.insert(0, opensfm_path)
+import opensfm
 
 from opensfm import dataset
 
